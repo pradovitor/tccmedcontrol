@@ -17,6 +17,8 @@ type Medication = {
   dosage: string;
   interval: string;
   observations: string;
+  price: string;
+  pharmacy: string;
 };
 
 type MedicationFormData = {
@@ -24,12 +26,30 @@ type MedicationFormData = {
   dosage: string;
   interval: string;
   observations: string;
+  price: string;
+  pharmacy: string;
 };
 
 const Medications = () => {
   const [medications, setMedications] = useState<Medication[]>([
-    { id: 1, name: "Paracetamol", dosage: "500mg", interval: "6 horas", observations: "Tomar com água" },
-    { id: 2, name: "Ibuprofeno", dosage: "200mg", interval: "8 horas", observations: "Tomar após as refeições" }
+    { 
+      id: 1, 
+      name: "Paracetamol", 
+      dosage: "500mg", 
+      interval: "6 horas", 
+      observations: "Tomar com água",
+      price: "R$ 12,90",
+      pharmacy: "Drogaria São Paulo"
+    },
+    { 
+      id: 2, 
+      name: "Ibuprofeno", 
+      dosage: "200mg", 
+      interval: "8 horas", 
+      observations: "Tomar após as refeições",
+      price: "R$ 15,50",
+      pharmacy: "Drogasil"
+    }
   ]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentMedication, setCurrentMedication] = useState<Medication | null>(null);
@@ -39,7 +59,9 @@ const Medications = () => {
       name: "",
       dosage: "",
       interval: "",
-      observations: ""
+      observations: "",
+      price: "",
+      pharmacy: ""
     }
   });
 
@@ -77,7 +99,9 @@ const Medications = () => {
       name: medication.name,
       dosage: medication.dosage,
       interval: medication.interval,
-      observations: medication.observations
+      observations: medication.observations,
+      price: medication.price,
+      pharmacy: medication.pharmacy
     });
     setIsDialogOpen(true);
   };
@@ -95,7 +119,9 @@ const Medications = () => {
       name: "",
       dosage: "",
       interval: "",
-      observations: ""
+      observations: "",
+      price: "",
+      pharmacy: ""
     });
     setCurrentMedication(null);
     setIsDialogOpen(true);
@@ -165,6 +191,34 @@ const Medications = () => {
                       </FormItem>
                     )}
                   />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="price"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Preço</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Ex: R$ 12,90" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="pharmacy"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Farmácia</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Ex: Drogaria São Paulo" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                   <FormField
                     control={form.control}
                     name="observations"
@@ -199,6 +253,8 @@ const Medications = () => {
                 <TableHead>Nome</TableHead>
                 <TableHead>Dosagem</TableHead>
                 <TableHead>Intervalo</TableHead>
+                <TableHead>Preço</TableHead>
+                <TableHead>Farmácia</TableHead>
                 <TableHead>Observações</TableHead>
                 <TableHead className="text-right">Ações</TableHead>
               </TableRow>
@@ -209,6 +265,8 @@ const Medications = () => {
                   <TableCell className="font-medium">{med.name}</TableCell>
                   <TableCell>{med.dosage}</TableCell>
                   <TableCell>{med.interval}</TableCell>
+                  <TableCell>{med.price}</TableCell>
+                  <TableCell>{med.pharmacy}</TableCell>
                   <TableCell>{med.observations}</TableCell>
                   <TableCell className="text-right space-x-2">
                     <Button

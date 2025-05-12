@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Layout } from "@/components/layout/Layout";
-import { Calendar, Bell, PillIcon } from "lucide-react";
+import { Calendar, Bell, PillIcon, Users, FileText } from "lucide-react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -60,6 +60,38 @@ const Dashboard = () => {
             </CardContent>
             <CardFooter>
               <Button onClick={() => navigate("/lembretes")}>Gerenciar Lembretes</Button>
+            </CardFooter>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Users className="mr-2 h-5 w-5" />
+                Cuidadores
+              </CardTitle>
+              <CardDescription>Gerenciar cuidadores</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Adicione e gerencie seus cuidadores, turnos e contatos.</p>
+            </CardContent>
+            <CardFooter>
+              <Button onClick={() => navigate("/cuidadores")}>Gerenciar Cuidadores</Button>
+            </CardFooter>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <FileText className="mr-2 h-5 w-5" />
+                Relatórios
+              </CardTitle>
+              <CardDescription>Gerar relatórios</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Visualize relatórios de medicação e gastos com medicamentos.</p>
+            </CardContent>
+            <CardFooter>
+              <Button onClick={() => navigate("/relatorios")}>Ver Relatórios</Button>
             </CardFooter>
           </Card>
         </div>

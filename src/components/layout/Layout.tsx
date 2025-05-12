@@ -2,7 +2,7 @@
 import React, { ReactNode, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { PillIcon, Home, Calendar, Bell, LogOut, Menu } from "lucide-react";
+import { PillIcon, Home, Calendar, Bell, LogOut, Menu, Users, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "@/hooks/use-toast";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -21,6 +21,8 @@ export const Layout = ({ children }: LayoutProps) => {
     { name: "Medicamentos", path: "/medicamentos", icon: PillIcon },
     { name: "Agendamentos", path: "/agendamentos", icon: Calendar },
     { name: "Lembretes", path: "/lembretes", icon: Bell },
+    { name: "Cuidadores", path: "/cuidadores", icon: Users },
+    { name: "Relatórios", path: "/relatorios", icon: FileText },
   ];
 
   const handleLogout = () => {

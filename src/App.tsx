@@ -12,6 +12,8 @@ import Dashboard from "./pages/Dashboard";
 import Medications from "./pages/Medications";
 import Schedules from "./pages/Schedules";
 import Reminders from "./pages/Reminders";
+import Caregivers from "./pages/Caregivers";
+import Reports from "./pages/Reports";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +31,8 @@ const App = () => (
           <Route path="/medicamentos" element={<Medications />} />
           <Route path="/agendamentos" element={<Schedules />} />
           <Route path="/lembretes" element={<Reminders />} />
+          <Route path="/cuidadores" element={<Caregivers />} />
+          <Route path="/relatorios" element={<Reports />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
