@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Layout } from "@/components/layout/Layout";
-import { Calendar, Bell, Pill } from "lucide-react";
+import { Calendar, Bell, PillIcon } from "lucide-react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Dashboard = () => {
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Pill className="mr-2 h-5 w-5" />
+                <PillIcon className="mr-2 h-5 w-5" />
                 Meus Medicamentos
               </CardTitle>
               <CardDescription>Gerencie seus medicamentos</CardDescription>

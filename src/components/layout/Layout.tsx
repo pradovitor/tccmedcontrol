@@ -2,7 +2,7 @@
 import React, { ReactNode, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { PillIcon, Home, Calendar, Bell, LogOut, Menu, X } from "lucide-react";
+import { PillIcon, Home, Calendar, Bell, LogOut, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "@/hooks/use-toast";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -18,7 +18,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: Home },
-    { name: "Medicamentos", path: "/medicamentos", icon: Pill },
+    { name: "Medicamentos", path: "/medicamentos", icon: PillIcon },
     { name: "Agendamentos", path: "/agendamentos", icon: Calendar },
     { name: "Lembretes", path: "/lembretes", icon: Bell },
   ];
