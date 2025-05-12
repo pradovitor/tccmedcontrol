@@ -2,7 +2,7 @@
 import React, { ReactNode, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { MedicationIcon, Home, Calendar, Pill, Bell, LogOut, Menu, X } from "lucide-react";
+import { PillIcon, Home, Calendar, Bell, LogOut, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "@/hooks/use-toast";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -63,7 +63,7 @@ export const Layout = ({ children }: LayoutProps) => {
       {/* Sidebar para desktop */}
       <aside className="hidden md:flex w-64 border-r flex-col p-4">
         <div className="flex items-center gap-2 mb-8">
-          <MedicationIcon className="h-6 w-6 text-primary" />
+          <PillIcon className="h-6 w-6 text-primary" />
           <h1 className="text-xl font-bold">MedControl</h1>
         </div>
         <nav className="space-y-2 flex-1">
@@ -83,7 +83,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <div className="md:hidden border-b sticky top-0 bg-background z-10">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
-            <MedicationIcon className="h-6 w-6 text-primary" />
+            <PillIcon className="h-6 w-6 text-primary" />
             <h1 className="text-xl font-bold">MedControl</h1>
           </div>
           <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
@@ -95,7 +95,7 @@ export const Layout = ({ children }: LayoutProps) => {
             <SheetContent side="left" className="w-[240px] sm:w-[300px]">
               <div className="flex flex-col h-full py-4">
                 <div className="flex items-center gap-2 mb-8">
-                  <MedicationIcon className="h-6 w-6 text-primary" />
+                  <PillIcon className="h-6 w-6 text-primary" />
                   <h1 className="text-xl font-bold">MedControl</h1>
                 </div>
                 <nav className="space-y-2 flex-1">

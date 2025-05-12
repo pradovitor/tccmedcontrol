@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { MedicationIcon, ArrowLeft } from "lucide-react";
+import { PillIcon, ArrowLeft } from "lucide-react";
 
 type RegisterFormData = {
   name: string;
@@ -50,7 +49,7 @@ const Register = () => {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-2">
-            <MedicationIcon className="h-10 w-10 text-primary" />
+            <PillIcon className="h-10 w-10 text-primary" />
           </div>
           <CardTitle className="text-2xl">Criar Conta</CardTitle>
           <CardDescription>Cadastre-se no MedControl</CardDescription>

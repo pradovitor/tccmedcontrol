@@ -13,7 +13,7 @@ import { ptBR } from "date-fns/locale";
 import { toast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon, Clock, Plus, Trash2, WhatsappIcon } from "lucide-react";
+import { CalendarIcon, Clock, Plus, Trash2, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 
@@ -278,9 +278,9 @@ const Schedules = () => {
                             href={generateWhatsAppLink(schedule)} 
                             target="_blank" 
                             rel="noopener noreferrer" 
-                            className="inline-flex items-center justify-center h-9 rounded-md px-3 text-xs bg-[#25D366] text-white"
+                            className="inline-flex items-center justify-center h-9 rounded-md px-3 text-xs bg-green-500 text-white"
                           >
-                            <WhatsappIcon className="mr-1 h-4 w-4" />
+                            <MessageSquare className="mr-1 h-4 w-4" />
                             Lembrete
                           </a>
                           <Button

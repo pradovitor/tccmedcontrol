@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { MedicationIcon } from "lucide-react";
+import { PillIcon } from "lucide-react";
 
 type LoginFormData = {
   email: string;
@@ -33,7 +32,7 @@ const Login = () => {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-2">
-            <MedicationIcon className="h-10 w-10 text-primary" />
+            <PillIcon className="h-10 w-10 text-primary" />
           </div>
           <CardTitle className="text-2xl">MedControl</CardTitle>
           <CardDescription>Faça login para acessar sua conta</CardDescription>

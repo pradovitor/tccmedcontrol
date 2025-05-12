@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Layout } from "@/components/layout/Layout";
-import { MedicationIcon, Calendar, Bell, Pill } from "lucide-react";
+import { Calendar, Bell, Pill } from "lucide-react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
