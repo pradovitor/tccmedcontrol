@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -7,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Calendar } from "@/components/ui/calendar";
-import { FileText, Download, AlertTriangle, FileChart, DollarSign } from "lucide-react";
+import { FileText, Download, AlertTriangle, BarChart, DollarSign } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -111,7 +110,7 @@ const Reports = () => {
         <Tabs defaultValue="medication" onValueChange={setReportType} className="w-full">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="medication" className="flex items-center">
-              <FileChart className="mr-2 h-4 w-4" />
+              <BarChart className="mr-2 h-4 w-4" />
               Relatório de Medicação
             </TabsTrigger>
             <TabsTrigger value="financial" className="flex items-center">
