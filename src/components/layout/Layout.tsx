@@ -54,14 +54,14 @@ export const Layout = ({ children }: LayoutProps) => {
             key={item.path + item.name}
             to={item.path}
             className={cn(
-              "flex items-center gap-3 rounded-lg px-3 py-2 text-base transition-all",
+              "flex items-center gap-3 rounded-lg px-4 py-3 text-lg transition-all",
               isActive
                 ? "bg-primary text-primary-foreground"
                 : "text-muted-foreground hover:bg-secondary hover:text-foreground"
             )}
             onClick={() => setIsSidebarOpen(false)}
           >
-            <Icon className="h-5 w-5" />
+            <Icon className="h-6 w-6" />
             {item.name}
           </Link>
         );
@@ -72,34 +72,34 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Sidebar para desktop */}
-      <aside className="hidden md:flex w-64 border-r flex-col p-4">
-        <div className="flex items-center gap-2 mb-8">
-          <PillIcon className="h-6 w-6 text-primary" />
-          <h1 className="text-xl font-bold">MedControl</h1>
+      <aside className="hidden md:flex w-72 border-r flex-col p-5">
+        <div className="flex items-center gap-3 mb-8">
+          <PillIcon className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl font-bold">MedControl</h1>
         </div>
         
         {/* Perfil do usuário */}
         {user && (
-          <div className="flex items-center space-x-3 mb-6 p-2 bg-muted rounded-lg">
-            <Avatar>
-              <AvatarFallback>{user.name.substring(0, 2).toUpperCase()}</AvatarFallback>
+          <div className="flex items-center space-x-4 mb-8 p-4 bg-muted rounded-lg">
+            <Avatar className="h-12 w-12">
+              <AvatarFallback className="text-lg">{user.name.substring(0, 2).toUpperCase()}</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-sm font-medium">{user.name}</p>
-              <p className="text-xs text-muted-foreground capitalize">{user.userType}</p>
+              <p className="text-base font-medium">{user.name}</p>
+              <p className="text-sm text-muted-foreground capitalize">{user.userType}</p>
             </div>
           </div>
         )}
 
-        <nav className="space-y-2 flex-1">
+        <nav className="space-y-3 flex-1">
           <NavItems />
         </nav>
         <Button
           variant="outline"
-          className="mt-auto w-full justify-start"
+          className="mt-auto w-full justify-start py-3 text-lg"
           onClick={handleLogout}
         >
-          <LogOut className="mr-2 h-5 w-5" />
+          <LogOut className="mr-2 h-6 w-6" />
           Sair
         </Button>
       </aside>
@@ -108,47 +108,48 @@ export const Layout = ({ children }: LayoutProps) => {
       <div className="md:hidden border-b sticky top-0 bg-background z-10">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
-            <PillIcon className="h-6 w-6 text-primary" />
-            <h1 className="text-xl font-bold">MedControl</h1>
+            <PillIcon className="h-7 w-7 text-primary" />
+            <h1 className="text-2xl font-bold">MedControl</h1>
           </div>
           <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
+              <Button variant="ghost" size="icon" className="h-12 w-12">
+                <Menu className="h-7 w-7" />
+                <span className="sr-only">Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[240px] sm:w-[300px]">
+            <SheetContent side="left" className="w-[280px] sm:w-[320px]">
               <div className="flex flex-col h-full py-4">
-                <div className="flex items-center gap-2 mb-8">
-                  <PillIcon className="h-6 w-6 text-primary" />
-                  <h1 className="text-xl font-bold">MedControl</h1>
+                <div className="flex items-center gap-3 mb-8">
+                  <PillIcon className="h-7 w-7 text-primary" />
+                  <h1 className="text-2xl font-bold">MedControl</h1>
                 </div>
                 
                 {/* Perfil do usuário para mobile */}
                 {user && (
-                  <div className="flex items-center space-x-3 mb-6 p-2 bg-muted rounded-lg">
-                    <Avatar>
-                      <AvatarFallback>{user.name.substring(0, 2).toUpperCase()}</AvatarFallback>
+                  <div className="flex items-center space-x-4 mb-6 p-4 bg-muted rounded-lg">
+                    <Avatar className="h-12 w-12">
+                      <AvatarFallback className="text-lg">{user.name.substring(0, 2).toUpperCase()}</AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="text-sm font-medium">{user.name}</p>
-                      <p className="text-xs text-muted-foreground capitalize">{user.userType}</p>
+                      <p className="text-base font-medium">{user.name}</p>
+                      <p className="text-sm text-muted-foreground capitalize">{user.userType}</p>
                     </div>
                   </div>
                 )}
                 
-                <nav className="space-y-2 flex-1">
+                <nav className="space-y-3 flex-1">
                   <NavItems />
                 </nav>
                 <Button
                   variant="outline"
-                  className="mt-auto w-full justify-start"
+                  className="mt-auto w-full justify-start py-3 text-lg"
                   onClick={() => {
                     setIsSidebarOpen(false);
                     handleLogout();
                   }}
                 >
-                  <LogOut className="mr-2 h-5 w-5" />
+                  <LogOut className="mr-2 h-6 w-6" />
                   Sair
                 </Button>
               </div>

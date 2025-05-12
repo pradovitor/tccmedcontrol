@@ -24,32 +24,33 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="flex justify-center mb-2">
-            <PillIcon className="h-10 w-10 text-primary" />
+          <div className="flex justify-center mb-4">
+            <PillIcon className="h-14 w-14 text-primary" />
           </div>
-          <CardTitle className="text-2xl">MedControl</CardTitle>
-          <CardDescription>Faça login para acessar sua conta</CardDescription>
+          <CardTitle className="text-3xl mb-2">MedControl</CardTitle>
+          <CardDescription className="text-lg">Faça login para acessar sua conta</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className="text-lg">Email</FormLabel>
                     <FormControl>
                       <Input 
                         type="email" 
                         placeholder="seu@email.com" 
+                        className="text-lg h-14"
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-base" />
                   </FormItem>
                 )}
               />
@@ -58,24 +59,25 @@ const Login = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Senha</FormLabel>
+                    <FormLabel className="text-lg">Senha</FormLabel>
                     <FormControl>
                       <Input 
                         type="password" 
                         placeholder="Sua senha" 
+                        className="text-lg h-14"
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-base" />
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">Entrar</Button>
+              <Button type="submit" className="w-full h-14 text-lg mt-6">Entrar</Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter className="flex justify-center">
-          <Button variant="link" onClick={() => navigate("/registro")}>
+          <Button variant="link" className="text-lg" onClick={() => navigate("/registro")}>
             Não tem uma conta? Registre-se
           </Button>
         </CardFooter>

@@ -114,48 +114,52 @@ const Schedules = () => {
   return (
     <Layout>
       <div className="container mx-auto p-4 md:p-6">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
           <h1 className="text-3xl font-bold">Agendamentos</h1>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-              <Button>
-                <Plus className="mr-2 h-4 w-4" />
+              <Button className="w-full md:w-auto">
+                <Plus className="mr-2 h-5 w-5" />
                 Novo Agendamento
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px]">
               <DialogHeader>
-                <DialogTitle>Adicionar Agendamento</DialogTitle>
-                <DialogDescription>
+                <DialogTitle className="text-2xl">Adicionar Agendamento</DialogTitle>
+                <DialogDescription className="text-lg">
                   Agende um horário para tomar seu medicamento.
                 </DialogDescription>
               </DialogHeader>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                   <FormField
                     control={form.control}
                     name="medicationId"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Medicamento</FormLabel>
+                        <FormLabel className="text-lg">Medicamento</FormLabel>
                         <Select
                           onValueChange={field.onChange}
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="h-12 text-base">
                               <SelectValue placeholder="Selecione um medicamento" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
                             {medications.map(med => (
-                              <SelectItem key={med.id} value={med.id.toString()}>
+                              <SelectItem 
+                                key={med.id} 
+                                value={med.id.toString()}
+                                className="text-base py-3"
+                              >
                                 {med.name}
                               </SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
-                        <FormMessage />
+                        <FormMessage className="text-base" />
                       </FormItem>
                     )}
                   />
@@ -164,14 +168,14 @@ const Schedules = () => {
                     name="date"
                     render={({ field }) => (
                       <FormItem className="flex flex-col">
-                        <FormLabel>Data</FormLabel>
+                        <FormLabel className="text-lg">Data</FormLabel>
                         <Popover>
                           <PopoverTrigger asChild>
                             <FormControl>
                               <Button
                                 variant={"outline"}
                                 className={cn(
-                                  "w-full pl-3 text-left font-normal",
+                                  "w-full h-12 pl-3 text-left font-normal text-base",
                                   !field.value && "text-muted-foreground"
                                 )}
                               >
@@ -180,7 +184,7 @@ const Schedules = () => {
                                 ) : (
                                   <span>Selecione uma data</span>
                                 )}
-                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                <CalendarIcon className="ml-auto h-5 w-5 opacity-50" />
                               </Button>
                             </FormControl>
                           </PopoverTrigger>
@@ -194,7 +198,7 @@ const Schedules = () => {
                             />
                           </PopoverContent>
                         </Popover>
-                        <FormMessage />
+                        <FormMessage className="text-base" />
                       </FormItem>
                     )}
                   />
@@ -203,16 +207,16 @@ const Schedules = () => {
                     name="time"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Horário</FormLabel>
+                        <FormLabel className="text-lg">Horário</FormLabel>
                         <FormControl>
-                          <Input type="time" {...field} />
+                          <Input type="time" {...field} className="h-12 text-base" />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-base" />
                       </FormItem>
                     )}
                   />
                   <DialogFooter>
-                    <Button type="submit">Adicionar</Button>
+                    <Button type="submit" size="lg">Adicionar</Button>
                   </DialogFooter>
                 </form>
               </Form>
@@ -223,7 +227,7 @@ const Schedules = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>Calendário</CardTitle>
+              <CardTitle className="text-xl">Calendário</CardTitle>
             </CardHeader>
             <CardContent>
               <Calendar
@@ -237,69 +241,74 @@ const Schedules = () => {
 
           <Card className="md:col-span-2">
             <CardHeader>
-              <CardTitle>
+              <CardTitle className="text-xl">
                 Agendamentos para {format(selectedDate, "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
               </CardTitle>
             </CardHeader>
             <CardContent>
               {filteredSchedules.length > 0 ? (
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Medicamento</TableHead>
-                      <TableHead>Horário</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Ações</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredSchedules.map((schedule) => (
-                      <TableRow key={schedule.id}>
-                        <TableCell>{schedule.medicationName}</TableCell>
-                        <TableCell className="flex items-center">
-                          <Clock className="mr-2 h-4 w-4" />
-                          {schedule.time}
-                        </TableCell>
-                        <TableCell>
-                          <span className={
-                            schedule.status === "completed" ? "text-green-500" :
-                            schedule.status === "missed" ? "text-red-500" :
-                            "text-yellow-500"
-                          }>
-                            {
-                              schedule.status === "completed" ? "Completado" :
-                              schedule.status === "missed" ? "Perdido" :
-                              "Pendente"
-                            }
-                          </span>
-                        </TableCell>
-                        <TableCell className="space-x-2">
-                          <a 
-                            href={generateWhatsAppLink(schedule)} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="inline-flex items-center justify-center h-9 rounded-md px-3 text-xs bg-green-500 text-white"
-                          >
-                            <MessageSquare className="mr-1 h-4 w-4" />
-                            Lembrete
-                          </a>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleDelete(schedule.id)}
-                          >
-                            <Trash2 className="h-4 w-4 text-red-500" />
-                          </Button>
-                        </TableCell>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-base">Medicamento</TableHead>
+                        <TableHead className="text-base">Horário</TableHead>
+                        <TableHead className="text-base">Status</TableHead>
+                        <TableHead className="text-base">Ações</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredSchedules.map((schedule) => (
+                        <TableRow key={schedule.id}>
+                          <TableCell className="text-base font-medium">{schedule.medicationName}</TableCell>
+                          <TableCell className="flex items-center text-base">
+                            <Clock className="mr-2 h-5 w-5" />
+                            {schedule.time}
+                          </TableCell>
+                          <TableCell>
+                            <span className={cn(
+                              "text-base px-3 py-1 rounded-full inline-block",
+                              schedule.status === "completed" ? "bg-green-100 text-green-800" :
+                              schedule.status === "missed" ? "bg-red-100 text-red-800" :
+                              "bg-yellow-100 text-yellow-800"
+                            )}>
+                              {
+                                schedule.status === "completed" ? "Completado" :
+                                schedule.status === "missed" ? "Perdido" :
+                                "Pendente"
+                              }
+                            </span>
+                          </TableCell>
+                          <TableCell className="space-x-2">
+                            <a 
+                              href={generateWhatsAppLink(schedule)} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="inline-flex items-center justify-center h-11 rounded-md px-4 text-base bg-green-500 text-white hover:bg-green-600"
+                            >
+                              <MessageSquare className="mr-1 h-5 w-5" />
+                              Lembrete
+                            </a>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleDelete(schedule.id)}
+                              className="ml-2 h-11"
+                            >
+                              <Trash2 className="h-5 w-5 text-red-500" />
+                              <span className="sr-only md:not-sr-only md:ml-2">Remover</span>
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               ) : (
                 <div className="text-center py-10">
-                  <p className="text-muted-foreground">Nenhum agendamento para esta data.</p>
-                  <Button className="mt-4" onClick={() => setIsDialogOpen(true)}>
-                    <Plus className="mr-2 h-4 w-4" />
+                  <p className="text-lg text-muted-foreground">Nenhum agendamento para esta data.</p>
+                  <Button className="mt-6" size="lg" onClick={() => setIsDialogOpen(true)}>
+                    <Plus className="mr-2 h-5 w-5" />
                     Adicionar agendamento
                   </Button>
                 </div>
