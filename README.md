@@ -1,73 +1,73 @@
-# Welcome to your Lovable project
+Welcome to MedControl
+📁 Project Info
+URL: Access via Lovable
 
-## Project info
+This is a medication control system built to manage users, prescriptions, schedules, and communication between caregivers and patients. Developed as part of an academic project (TCC).
 
-**URL**: https://lovable.dev/projects/e478b4b0-ea00-4982-a133-a55f906f70d0
+🛠️ How to Edit This Project
+You have multiple ways to contribute or make changes to the system:
 
-## How can I edit this code?
+➤ Use Lovable (Recommended)
+The easiest way to develop and maintain this project is through Lovable. Any changes you prompt or make in the editor are committed automatically.
 
-There are several ways of editing your application.
+➤ Use Your Local IDE
+If you prefer to work locally:
 
-**Use Lovable**
+bash
+Copiar
+Editar
+# Step 1: Clone the repository
+git clone <YOUR_GIT_REPO_URL>
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e478b4b0-ea00-4982-a133-a55f906f70d0) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
+# Step 2: Navigate to the folder
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Step 3: Install the dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Step 4: Start the development server
 npm run dev
-```
+Make sure you have Node.js and npm installed. Install with nvm
 
-**Edit a file directly in GitHub**
+➤ GitHub Web Editor
+Edit any file directly from GitHub using the built-in editor:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Open the desired file
 
-**Use GitHub Codespaces**
+Click the pencil ✏️ icon
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Make your changes and commit
 
-## What technologies are used for this project?
+➤ GitHub Codespaces (Cloud IDE)
+Go to the main repo page
 
-This project is built with:
+Click the green “Code” button
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Open the Codespaces tab
 
-## How can I deploy this project?
+Click “New codespace”
 
-Simply open [Lovable](https://lovable.dev/projects/e478b4b0-ea00-4982-a133-a55f906f70d0) and click on Share -> Publish.
+🧪 Technologies Used
+Vite
 
-## Can I connect a custom domain to my Lovable project?
+TypeScript
 
-Yes, you can!
+React
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+shadcn/ui
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Tailwind CSS
+
+🚀 How to Deploy
+Go to your Lovable project
+
+Click Share > Publish
+
+🌐 Custom Domain
+You can connect your own domain to this project:
+
+Go to Project > Settings > Domains
+
+Click on Connect Domain
+
+Follow the steps in the official guide
