@@ -4,8 +4,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PillIcon, Home, Calendar, Bell, LogOut, Menu, Users, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { toast } from "@/hooks/use-toast";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useAuth } from "@/context/AuthContext";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 type LayoutProps = {
   children: ReactNode;
@@ -15,23 +16,31 @@ export const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { user, logout } = useAuth();
 
+  // Filtrar itens de menu com base no tipo de usuário
   const menuItems = [
-    { name: "Dashboard", path: "/dashboard", icon: Home },
-    { name: "Medicamentos", path: "/medicamentos", icon: PillIcon },
-    { name: "Agendamentos", path: "/agendamentos", icon: Calendar },
-    { name: "Lembretes", path: "/lembretes", icon: Bell },
-    { name: "Cuidadores", path: "/cuidadores", icon: Users },
-    { name: "Relatórios", path: "/relatorios", icon: FileText },
-  ];
+    { name: "Dashboard", path: "/dashboard", icon: Home, access: ["patient", "caregiver"] },
+    { name: "Medicamentos", path: "/medicamentos", icon: PillIcon, access: ["patient", "caregiver"] },
+    { name: "Agendamentos", path: "/agendamentos", icon: Calendar, access: ["patient", "caregiver"] },
+    { name: "Lembretes", path: "/lembretes", icon: Bell, access: ["patient", "caregiver"] },
+    { 
+      name: "Cuidadores", 
+      path: "/cuidadores", 
+      icon: Users, 
+      access: ["patient"] 
+    },
+    { 
+      name: "Pacientes", 
+      path: "/cuidadores", 
+      icon: Users, 
+      access: ["caregiver"] 
+    },
+    { name: "Relatórios", path: "/relatorios", icon: FileText, access: ["patient", "caregiver"] },
+  ].filter(item => user && item.access.includes(user.userType));
 
   const handleLogout = () => {
-    // Lógica de logout (simulada)
-    toast({
-      title: "Logout realizado",
-      description: "Você saiu do sistema com sucesso"
-    });
-    navigate("/login");
+    logout();
   };
 
   const NavItems = () => (
@@ -42,7 +51,7 @@ export const Layout = ({ children }: LayoutProps) => {
         
         return (
           <Link
-            key={item.path}
+            key={item.path + item.name}
             to={item.path}
             className={cn(
               "flex items-center gap-3 rounded-lg px-3 py-2 text-base transition-all",
@@ -68,6 +77,20 @@ export const Layout = ({ children }: LayoutProps) => {
           <PillIcon className="h-6 w-6 text-primary" />
           <h1 className="text-xl font-bold">MedControl</h1>
         </div>
+        
+        {/* Perfil do usuário */}
+        {user && (
+          <div className="flex items-center space-x-3 mb-6 p-2 bg-muted rounded-lg">
+            <Avatar>
+              <AvatarFallback>{user.name.substring(0, 2).toUpperCase()}</AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="text-sm font-medium">{user.name}</p>
+              <p className="text-xs text-muted-foreground capitalize">{user.userType}</p>
+            </div>
+          </div>
+        )}
+
         <nav className="space-y-2 flex-1">
           <NavItems />
         </nav>
@@ -100,6 +123,20 @@ export const Layout = ({ children }: LayoutProps) => {
                   <PillIcon className="h-6 w-6 text-primary" />
                   <h1 className="text-xl font-bold">MedControl</h1>
                 </div>
+                
+                {/* Perfil do usuário para mobile */}
+                {user && (
+                  <div className="flex items-center space-x-3 mb-6 p-2 bg-muted rounded-lg">
+                    <Avatar>
+                      <AvatarFallback>{user.name.substring(0, 2).toUpperCase()}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="text-sm font-medium">{user.name}</p>
+                      <p className="text-xs text-muted-foreground capitalize">{user.userType}</p>
+                    </div>
+                  </div>
+                )}
+                
                 <nav className="space-y-2 flex-1">
                   <NavItems />
                 </nav>

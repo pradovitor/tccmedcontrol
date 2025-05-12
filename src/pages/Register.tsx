@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { PillIcon, ArrowLeft } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 type RegisterFormData = {
   name: string;
@@ -19,6 +19,7 @@ type RegisterFormData = {
 
 const Register = () => {
   const navigate = useNavigate();
+  const { register } = useAuth();
   const form = useForm<RegisterFormData>({
     defaultValues: {
       userType: "patient",
@@ -26,22 +27,15 @@ const Register = () => {
   });
 
   const onSubmit = (data: RegisterFormData) => {
-    // Simulação de registro - será substituído pela integração real
     if (data.password !== data.confirmPassword) {
-      toast({
-        title: "Erro no registro",
-        description: "As senhas não conferem",
-        variant: "destructive",
+      form.setError("confirmPassword", { 
+        type: "manual", 
+        message: "As senhas não conferem" 
       });
       return;
     }
 
-    console.log("Registro com:", data);
-    toast({
-      title: "Conta criada",
-      description: "Sua conta foi criada com sucesso",
-    });
-    navigate("/login");
+    register(data.name, data.email, data.password, data.userType);
   };
 
   return (

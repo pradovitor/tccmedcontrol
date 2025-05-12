@@ -1,12 +1,13 @@
+
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { PillIcon } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 type LoginFormData = {
   email: string;
@@ -16,15 +17,10 @@ type LoginFormData = {
 const Login = () => {
   const navigate = useNavigate();
   const form = useForm<LoginFormData>();
+  const { login } = useAuth();
 
   const onSubmit = (data: LoginFormData) => {
-    // Simulação de login - será substituído por autenticação real
-    console.log("Login com:", data);
-    toast({
-      title: "Login realizado",
-      description: "Você foi autenticado com sucesso",
-    });
-    navigate("/dashboard");
+    login(data.email, data.password);
   };
 
   return (
