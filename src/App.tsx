@@ -15,6 +15,8 @@ import Schedules from "./pages/Schedules";
 import Reminders from "./pages/Reminders";
 import Caregivers from "./pages/Caregivers";
 import Reports from "./pages/Reports";
+import Community from "./pages/Community";
+import MedicationDatabase from "./pages/MedicationDatabase";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -39,6 +41,8 @@ const App = () => (
               <Route path="/lembretes" element={<Reminders />} />
               <Route path="/cuidadores" element={<Caregivers />} />
               <Route path="/relatorios" element={<Reports />} />
+              <Route path="/comunidade" element={<Community />} />
+              <Route path="/banco-medicamentos" element={<MedicationDatabase />} />
             </Route>
             
             <Route path="*" element={<NotFound />} />

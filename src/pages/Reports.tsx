@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -12,6 +11,7 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 type MedicationReport = {
   id: number;
@@ -45,7 +45,8 @@ const Reports = () => {
   const [startDate, setStartDate] = useState<Date>(new Date(Date.now() - 7 * 86400000)); // 7 dias atrás
   const [endDate, setEndDate] = useState<Date>(new Date());
   const [reportType, setReportType] = useState("medication");
-
+  const { toast } = useToast();
+  
   // Dados de exemplo para o relatório de medicamentos
   const medicationReports: MedicationReport[] = [
     { 
