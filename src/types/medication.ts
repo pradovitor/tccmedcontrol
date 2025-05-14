@@ -7,6 +7,7 @@ export type Medication = {
   observations: string;
   price: string;
   pharmacy: string;
+  image?: string; // Optional image as base64 string
 };
 
 export type MedicationFormData = {
@@ -16,4 +17,5 @@ export type MedicationFormData = {
   observations: string;
   price: string;
   pharmacy: string;
+  image?: string; // Optional image as base64 string
 };

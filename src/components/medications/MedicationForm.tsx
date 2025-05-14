@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Medication, MedicationFormData } from "@/types/medication";
+import { Upload } from "lucide-react";
 
 interface MedicationFormProps {
   onSubmit: (data: MedicationFormData) => void;
@@ -14,6 +15,8 @@ interface MedicationFormProps {
 }
 
 export const MedicationForm: React.FC<MedicationFormProps> = ({ onSubmit, currentMedication }) => {
+  const [imagePreview, setImagePreview] = useState<string | null>(currentMedication?.image || null);
+
   const form = useForm<MedicationFormData>({
     defaultValues: currentMedication ? {
       name: currentMedication.name,
@@ -21,20 +24,42 @@ export const MedicationForm: React.FC<MedicationFormProps> = ({ onSubmit, curren
       interval: currentMedication.interval,
       observations: currentMedication.observations,
       price: currentMedication.price,
-      pharmacy: currentMedication.pharmacy
+      pharmacy: currentMedication.pharmacy,
+      image: currentMedication.image
     } : {
       name: "",
       dosage: "",
       interval: "",
       observations: "",
       price: "",
-      pharmacy: ""
+      pharmacy: "",
+      image: ""
     }
   });
 
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setImagePreview(base64String);
+        form.setValue("image", base64String);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmitWithImage = (data: MedicationFormData) => {
+    onSubmit({
+      ...data,
+      image: imagePreview || undefined
+    });
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(handleSubmitWithImage)} className="space-y-4">
         <FormField
           control={form.control}
           name="name"
@@ -118,6 +143,38 @@ export const MedicationForm: React.FC<MedicationFormProps> = ({ onSubmit, curren
             </FormItem>
           )}
         />
+        
+        <FormField
+          control={form.control}
+          name="image"
+          render={() => (
+            <FormItem>
+              <FormLabel>Imagem do Medicamento</FormLabel>
+              <FormControl>
+                <div className="flex flex-col gap-3">
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="cursor-pointer"
+                  />
+                  {imagePreview && (
+                    <div className="mt-2">
+                      <p className="text-sm mb-2">Prévia da imagem:</p>
+                      <img 
+                        src={imagePreview} 
+                        alt="Prévia do medicamento" 
+                        className="max-w-[200px] max-h-[200px] object-contain border rounded-md"
+                      />
+                    </div>
+                  )}
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <DialogFooter>
           <Button type="submit">
             {currentMedication ? "Salvar Alterações" : "Adicionar"}
