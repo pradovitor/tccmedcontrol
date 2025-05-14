@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MessageSquare, Send, Smartphone, WhatsApp } from "lucide-react";
+import { MessageSquare, Send, Smartphone } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "@/hooks/use-toast";
 import { Textarea } from "@/components/ui/textarea";
@@ -75,7 +75,7 @@ const Reminders = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <WhatsApp className="mr-2 h-5 w-5 text-green-500" />
+                <MessageSquare className="mr-2 h-5 w-5 text-green-500" />
                 Lembretes via WhatsApp
               </CardTitle>
               <CardDescription>
