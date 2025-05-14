@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { FileText } from "lucide-react";
+import { FileText, Printer } from "lucide-react";
 import { ReportType } from "@/types/reports";
 
 interface ReportFiltersProps {
@@ -16,6 +16,7 @@ interface ReportFiltersProps {
   setStartDate: (date: Date) => void;
   setEndDate: (date: Date) => void;
   onGeneratePDF: () => void;
+  onPrint: () => void;
 }
 
 const ReportFilters: React.FC<ReportFiltersProps> = ({
@@ -23,7 +24,8 @@ const ReportFilters: React.FC<ReportFiltersProps> = ({
   endDate,
   setStartDate,
   setEndDate,
-  onGeneratePDF
+  onGeneratePDF,
+  onPrint
 }) => {
   return (
     <Card className="mt-4 border-t-0">
@@ -93,8 +95,12 @@ const ReportFilters: React.FC<ReportFiltersProps> = ({
           </div>
         </div>
       </CardContent>
-      <CardFooter>
-        <Button onClick={onGeneratePDF} className="ml-auto">
+      <CardFooter className="flex justify-end gap-2">
+        <Button onClick={onPrint} variant="outline">
+          <Printer className="mr-2 h-4 w-4" />
+          Imprimir
+        </Button>
+        <Button onClick={onGeneratePDF}>
           <FileText className="mr-2 h-4 w-4" />
           Gerar PDF
         </Button>

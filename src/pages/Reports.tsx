@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BarChart, DollarSign, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useReports } from "@/hooks/useReports";
-import { generatePDF } from "@/utils/reportUtils";
+import { generatePDF, printCurrentPage } from "@/utils/reportUtils";
 import ReportFilters from "@/components/reports/ReportFilters";
 import MedicationReportContent from "@/components/reports/MedicationReportContent";
 import FinancialReportContent from "@/components/reports/FinancialReportContent";
@@ -56,12 +56,35 @@ const Reports = () => {
     }
   };
 
+  // Função para imprimir a página atual
+  const handlePrint = () => {
+    try {
+      const success = printCurrentPage();
+      
+      if (success) {
+        toast({
+          title: "Impressão Iniciada",
+          description: "O relatório foi enviado para impressão."
+        });
+      } else {
+        throw new Error("Falha ao imprimir");
+      }
+    } catch (error) {
+      console.error("Erro ao imprimir:", error);
+      toast({
+        title: "Erro ao imprimir",
+        description: "Ocorreu um erro ao imprimir o relatório.",
+        variant: "destructive"
+      });
+    }
+  };
+
   return (
     <Layout>
       <div className="container mx-auto p-4 md:p-6">
         <h1 className="text-3xl font-bold mb-6">Relatórios</h1>
 
-        <Tabs defaultValue="medication" onValueChange={setReportType} className="w-full">
+        <Tabs defaultValue="medication" onValueChange={(value) => setReportType(value as any)} className="w-full">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="medication" className="flex items-center">
               <BarChart className="mr-2 h-4 w-4" />
@@ -83,6 +106,7 @@ const Reports = () => {
             setStartDate={setStartDate}
             setEndDate={setEndDate}
             onGeneratePDF={handleGeneratePDF}
+            onPrint={handlePrint}
           />
 
           <TabsContent value="medication" className="mt-6">

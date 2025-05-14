@@ -1,8 +1,9 @@
+
 import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { QualityReport } from "@/types/reports";
-import { renderQualityIndicator } from "@/utils/reportUtils";
+import { QualityIndicator } from "./QualityIndicator";
 
 interface QualityReportContentProps {
   qualityReports: QualityReport[];
@@ -44,7 +45,7 @@ const QualityReportContent: React.FC<QualityReportContentProps> = ({ qualityRepo
                 <TableCell className="text-green-600">{report.takenDoses}</TableCell>
                 <TableCell className="text-red-600">{report.missedDoses}</TableCell>
                 <TableCell className="w-1/4">
-                  {renderQualityIndicator(report.adherenceRate)}
+                  <QualityIndicator adherenceRate={report.adherenceRate} />
                 </TableCell>
               </TableRow>
             ))}
