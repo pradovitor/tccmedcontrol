@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, Send, Smartphone, WhatsApp } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "@/hooks/use-toast";
 import { Textarea } from "@/components/ui/textarea";
@@ -39,8 +39,29 @@ const Reminders = () => {
   };
 
   const generateTestMessage = () => {
+    let phoneNumber = settings.phoneNumber.replace(/\D/g, "");
+    // Se o número não começar com +55, adicione o código do Brasil
+    if (!phoneNumber.startsWith("55")) {
+      phoneNumber = "55" + phoneNumber;
+    }
+    
     const message = encodeURIComponent(
       `${settings.customMessage} (Mensagem de teste)`
+    );
+    
+    // Use a API do WhatsApp para abrir o app com o número e mensagem
+    window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`, '_blank');
+    
+    toast({
+      title: "Teste de WhatsApp",
+      description: "Abrindo WhatsApp com a mensagem de teste."
+    });
+  };
+
+  const testDirectWhatsApp = () => {
+    // Abre o WhatsApp diretamente sem número específico
+    const message = encodeURIComponent(
+      `${settings.customMessage} (Mensagem de teste direta)`
     );
     window.open(`https://wa.me/?text=${message}`, '_blank');
   };
@@ -54,7 +75,7 @@ const Reminders = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <MessageSquare className="mr-2 h-5 w-5 text-green-500" />
+                <WhatsApp className="mr-2 h-5 w-5 text-green-500" />
                 Lembretes via WhatsApp
               </CardTitle>
               <CardDescription>
@@ -95,7 +116,7 @@ const Reminders = () => {
                           <Input placeholder="Ex: (11) 98765-4321" {...field} />
                         </FormControl>
                         <FormDescription>
-                          Informe o número que receberá os lembretes
+                          Informe o número que receberá os lembretes (com DDD)
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -151,8 +172,19 @@ const Reminders = () => {
                       type="button" 
                       variant="outline"
                       onClick={generateTestMessage}
+                      className="flex items-center"
                     >
-                      Testar Mensagem
+                      <Smartphone className="mr-2 h-4 w-4" />
+                      Testar com Número
+                    </Button>
+                    <Button 
+                      type="button" 
+                      variant="outline"
+                      onClick={testDirectWhatsApp}
+                      className="flex items-center"
+                    >
+                      <Send className="mr-2 h-4 w-4" />
+                      Testar Sem Número
                     </Button>
                   </div>
                 </form>
