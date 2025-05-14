@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -6,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MessageSquare, Send, Smartphone } from "lucide-react";
+import { MessageSquare, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "@/hooks/use-toast";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,7 +37,7 @@ const Reminders = () => {
     });
   };
 
-  const generateTestMessage = () => {
+  const sendMessageNow = () => {
     let phoneNumber = settings.phoneNumber.replace(/\D/g, "");
     // Se o número não começar com +55, adicione o código do Brasil
     if (!phoneNumber.startsWith("55")) {
@@ -53,17 +52,9 @@ const Reminders = () => {
     window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`, '_blank');
     
     toast({
-      title: "Teste de WhatsApp",
-      description: "Abrindo WhatsApp com a mensagem de teste."
+      title: "Enviando mensagem",
+      description: "Abrindo WhatsApp com a mensagem."
     });
-  };
-
-  const testDirectWhatsApp = () => {
-    // Abre o WhatsApp diretamente sem número específico
-    const message = encodeURIComponent(
-      `${settings.customMessage} (Mensagem de teste direta)`
-    );
-    window.open(`https://wa.me/?text=${message}`, '_blank');
   };
 
   return (
@@ -171,20 +162,11 @@ const Reminders = () => {
                     <Button 
                       type="button" 
                       variant="outline"
-                      onClick={generateTestMessage}
-                      className="flex items-center"
-                    >
-                      <Smartphone className="mr-2 h-4 w-4" />
-                      Testar com Número
-                    </Button>
-                    <Button 
-                      type="button" 
-                      variant="outline"
-                      onClick={testDirectWhatsApp}
+                      onClick={sendMessageNow}
                       className="flex items-center"
                     >
                       <Send className="mr-2 h-4 w-4" />
-                      Testar Sem Número
+                      Enviar Agora
                     </Button>
                   </div>
                 </form>
@@ -202,7 +184,7 @@ const Reminders = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <p>O MedControl utiliza o WhatsApp para enviar lembretes sobre seus medicamentos, ajudando você a não esquecer de tomá-los no horário correto.</p>
+                  <p>O MedControl utiliza o WhatsApp para enviar lembretes sobre seus medicamentos, ajudando você a não esquecer de tomar-los no horário correto.</p>
                   
                   <h3 className="text-lg font-semibold mt-4">Como funciona:</h3>
                   <ol className="list-decimal pl-5 space-y-2">
